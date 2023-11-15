@@ -4,30 +4,30 @@
 const cardTemplate = document.querySelector("#card-template").content;
 
 // @todo: DOM узлы
-const placesList = document.querySelector(".places__list");
+const cardsContainer = document.querySelector(".places__list");
 const popupTypeNewCard = document.querySelector(".popup_type_new-card");
 const profileAddButton = document.querySelector(".profile__add-button");
-const popupButton = popupTypeNewCard.querySelector(".popup__close");
+const popupTypeNewCardButton = popupTypeNewCard.querySelector(".popup__close");
 
 // @todo: Функция создания карточки
-function newCard(card, deleteCardFunction) {
-  const allCards = cardTemplate.querySelector(".card").cloneNode(true);
+function createCard(card, deleteCardFunction) {
+  const allCard = cardTemplate.querySelector(".card").cloneNode(true);
 
-  allCards.querySelector(".card__title").textContent = card.name;
-  allCards.querySelector(".card__image").src = card.link;
-  allCards.querySelector(".card__image").alt = card.name;
+  allCard.querySelector(".card__title").textContent = card.name;
+  allCard.querySelector(".card__image").src = card.link;
+  allCard.querySelector(".card__image").alt = card.name;
 
-  allCards
+  allCard
     .querySelector(".card__delete-button")
     .addEventListener("click", deleteCardFunction);
 
-  return allCards;
+  return allCard;
 }
 
 // @todo: Функция удаления карточки
 
 function deleteCardFunction(e) {
-  let cardRemove = e.target.closest(".card");
+  const cardRemove = e.target.closest(".card");
   cardRemove.remove();
 }
 
@@ -35,8 +35,8 @@ function deleteCardFunction(e) {
 
 function renderCards() {
   initialCards.forEach((item) => {
-    const card = newCard(item, deleteCardFunction);
-    placesList.append(card);
+    const card = createCard(item, deleteCardFunction);
+    cardsContainer.append(card);
   });
 }
 
@@ -45,7 +45,7 @@ function openClosePopUp() {
     popupTypeNewCard.style.display = "flex";
   });
 
-  popupButton.addEventListener("click", function () {
+  popupTypeNewCardButton.addEventListener("click", function () {
     popupTypeNewCard.style.display = "none";
   });
 }
