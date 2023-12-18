@@ -2,59 +2,13 @@ import "./pages/index.css";
 import { initialCards } from "./components/cards.js";
 
 import { openPopup } from "./components/card.js";
+import { createCard, updateCards } from "./components/modal.js";
 
-const formElement = document.querySelectorAll(".popup__form");
-// @todo: Темплейт карточки
-const cardTemplate = document.querySelector("#card-template").content;
-// @todo: DOM узлы
-const cardsContainer = document.querySelector(".places__list");
+export const formElement = document.querySelectorAll(".popup__form");
+export const cardTemplate = document.querySelector("#card-template").content;
+export const cardsContainer = document.querySelector(".places__list");
 
 // @todo: Функция создания карточки
-function createCard(card, deleteCardFunction, likeProc) {
-  const allCard = cardTemplate.querySelector(".card").cloneNode(true);
-
-  allCard.querySelector(".card__title").textContent = card.name;
-  allCard.querySelector(".card__image").src = card.link;
-  allCard.querySelector(".card__image").alt = card.name;
-
-  const likeButton = allCard.querySelector(".card__like-button");
-
-  likeButton.addEventListener("click", function () {
-    stateLike(likeButton);
-  });
-
-  allCard
-    .querySelector(".card__delete-button")
-    .addEventListener("click", deleteCardFunction);
-
-  allCard.querySelector(".card__image").addEventListener("click", openImage);
-
-  return allCard;
-}
-
-function updateCards(card, deleteCardFunction, likeProc) {
-  const newcard = cardTemplate.querySelector(".card").cloneNode(true);
-
-  newcard.querySelector(".card__title").textContent = card.name;
-  newcard.querySelector(".card__image").src = card.link;
-  newcard.querySelector(".card__image").alt = card.name;
-
-  const likeButton = newcard.querySelector(".card__like-button");
-
-  likeButton.addEventListener("click", function () {
-    stateLike(likeButton);
-  });
-
-  newcard
-    .querySelector(".card__delete-button")
-    .addEventListener("click", deleteCardFunction);
-
-  cardsContainer.append(newcard);
-
-  newcard.querySelector(".card__image").addEventListener("click", openImage);
-
-  return newcard;
-}
 
 // @todo: Функция удаления карточки
 
@@ -97,7 +51,7 @@ function addCard(name, link) {
 
 ///
 
-function openImage(e) {
+export function openImage(e) {
   const popupImageBox = document.querySelector(".popup_type_image");
   const popupImage = popupImageBox.querySelector(".popup__image");
   const popupCaption = popupImageBox.querySelector(".popup__caption");

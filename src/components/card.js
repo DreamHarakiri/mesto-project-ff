@@ -55,6 +55,7 @@ export function openPopup(e) {
 
 function closePopup(e) {
   e.classList.remove("popup_is-opened");
+  setTimeout(() => e.classList.remove("popup_is-animated"), 600);
 }
 
 function overlayClose(e) {
