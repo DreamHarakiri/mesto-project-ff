@@ -27,7 +27,6 @@ const jobProfile = document.querySelector(".profile__description");
 function handleFormSubmit(evt) {
   evt.preventDefault();
   if (evt.target.getAttribute("name") === "edit-profile") {
-    console.log(nameInput.value + " " + jobInput.value);
     nameProfile.textContent = nameInput.value;
     jobProfile.textContent = jobInput.value;
 
@@ -40,7 +39,6 @@ formElement.addEventListener("submit", handleFormSubmit);
 /* функция открытия и закрытия попапа */
 
 export function openPopup(e) {
-  console.log(e.target.className);
   if (e.target.className === "profile__add-button") {
     popupTypeNewCard.classList.add("popup_is-opened");
     popupTypeNewCard.classList.add("popup_is-animated");
@@ -83,7 +81,6 @@ function initialKey(e) {
   const initialPopup = document.querySelector(".popup_is-opened");
   if (initialPopup) {
     if (e.key === "Escape") {
-      console.log("test");
       closePopup(initialPopup);
     }
   }

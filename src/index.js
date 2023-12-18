@@ -56,15 +56,12 @@ export function openImage(e) {
   const popupImage = popupImageBox.querySelector(".popup__image");
   const popupCaption = popupImageBox.querySelector(".popup__caption");
 
-  console.log(e.target.src);
-
   const card = e.target.closest(".card"),
     cardImage = card.querySelector(".card__image"),
     cardTitle = card.querySelector(".card__title");
   popupImage.src = cardImage.src;
   popupCaption.textContent = cardTitle.textContent;
 
-  console.log(popupImage.src + " " + popupCaption.textContent);
   openPopup(e);
 }
 
