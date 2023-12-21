@@ -1,47 +1,39 @@
-import { formElement, cardTemplate, cardsContainer, openImage } from "../index";
+import {
+  formElement,
+  cardTemplatesContent,
+  cardsContainerPlaces,
+  openImagePopup,
+} from "../index";
+import { likeCard } from "./card";
 
 export function createCard(card, deleteCardFunction, likeProc) {
-  const allCard = cardTemplate.querySelector(".card").cloneNode(true);
+  const allCards = cardTemplatesContent.querySelector(".card").cloneNode(true);
 
-  allCard.querySelector(".card__title").textContent = card.name;
-  allCard.querySelector(".card__image").src = card.link;
-  allCard.querySelector(".card__image").alt = card.name;
+  const cardImage = allCards.querySelector(".card__image");
 
-  const likeButton = allCard.querySelector(".card__like-button");
+  allCards.querySelector(".card__title").textContent = card.name;
+  allCards.querySelector(".card__image").src = card.link;
+  allCards.querySelector(".card__image").alt = card.name;
+
+  const likeButton = allCards.querySelector(".card__like-button");
 
   likeButton.addEventListener("click", function () {
-    stateLike(likeButton);
+    likeCard(likeButton);
   });
 
-  allCard
+  allCards
     .querySelector(".card__delete-button")
     .addEventListener("click", deleteCardFunction);
 
-  allCard.querySelector(".card__image").addEventListener("click", openImage);
+  allCards
+    .querySelector(".card__image")
+    .addEventListener("click", openImagePopup);
 
-  return allCard;
+  return allCards;
 }
 
-export function updateCards(card, deleteCardFunction, likeProc) {
-  const newcard = cardTemplate.querySelector(".card").cloneNode(true);
-
-  newcard.querySelector(".card__title").textContent = card.name;
-  newcard.querySelector(".card__image").src = card.link;
-  newcard.querySelector(".card__image").alt = card.name;
-
-  const likeButton = newcard.querySelector(".card__like-button");
-
-  likeButton.addEventListener("click", function () {
-    stateLike(likeButton);
-  });
-
-  newcard
-    .querySelector(".card__delete-button")
-    .addEventListener("click", deleteCardFunction);
-
-  cardsContainer.append(newcard);
-
-  newcard.querySelector(".card__image").addEventListener("click", openImage);
-
-  return newcard;
+export function deleteCardFunction(e) {
+  console.log("test");
+  const cardRemove = e.target.closest(".card");
+  cardRemove.remove();
 }
