@@ -1,39 +1,35 @@
-import {
-  formElement,
-  cardTemplatesContent,
-  cardsContainerPlaces,
-  openImagePopup,
-} from "../index";
-import { likeCard } from "./card";
+import { popupImageBox } from "../index.js";
 
-export function createCard(card, deleteCardFunction, likeProc) {
-  const allCards = cardTemplatesContent.querySelector(".card").cloneNode(true);
-
-  const cardImage = allCards.querySelector(".card__image");
-
-  allCards.querySelector(".card__title").textContent = card.name;
-  allCards.querySelector(".card__image").src = card.link;
-  allCards.querySelector(".card__image").alt = card.name;
-
-  const likeButton = allCards.querySelector(".card__like-button");
-
-  likeButton.addEventListener("click", function () {
-    likeCard(likeButton);
-  });
-
-  allCards
-    .querySelector(".card__delete-button")
-    .addEventListener("click", deleteCardFunction);
-
-  allCards
-    .querySelector(".card__image")
-    .addEventListener("click", openImagePopup);
-
-  return allCards;
+export function openPopup(e) {
+  e.classList.add("popup_is-animated", "popup_is-opened");
+  document.addEventListener("keydown", initialKey);
 }
 
-export function deleteCardFunction(e) {
-  console.log("test");
-  const cardRemove = e.target.closest(".card");
-  cardRemove.remove();
+export function closePopup(e) {
+  e.classList.remove("popup_is-opened");
+  setTimeout(() => e.classList.remove("popup_is-animated"), 600);
+}
+
+function overlayClose(e) {
+  if (e.querySelector(".popup_is-opened")) {
+    closePopup(e);
+  }
+}
+
+export function openImagePopup(itemLink, itemName) {
+  const popupImage = popupImageBox.querySelector(".popup__image");
+  const popupCaption = popupImageBox.querySelector(".popup__caption");
+  popupImage.src = itemLink;
+  popupImage.alt = itemName;
+  popupCaption.textContent = itemName;
+  openPopup(popupImageBox);
+}
+
+function initialKey(e) {
+  if (e.key === "Escape") {
+    const initialPopup = document.querySelector(".popup_is-opened");
+    if (initialPopup) {
+      closePopup(initialPopup);
+    }
+  }
 }
