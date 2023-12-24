@@ -28,7 +28,6 @@ const formPopupNewPlace = document.forms["new-place"];
 export const cardTemplatesContent =
   document.querySelector("#card-template").content;
 export const cardsContainerPlaces = document.querySelector(".places__list");
-export const formElements = document.querySelectorAll(".popup__form");
 export const popupImageBox = document.querySelector(".popup_type_image");
 export const popupImage = popupImageBox.querySelector(".popup__image");
 export const popupCaption = popupImageBox.querySelector(".popup__caption");
