@@ -22,6 +22,7 @@ const isOpenedPopup = document.querySelector(".opened-popup");
 const headerImage = document.querySelector(".popup__input_type_card-name");
 const urlImage = document.querySelector(".popup__input_type_url");
 const formElementEditProfile = document.querySelector(".popup__form");
+const formPopupNewPlace = document.forms["new-place"];
 
 //export const
 export const cardTemplatesContent =
@@ -29,6 +30,8 @@ export const cardTemplatesContent =
 export const cardsContainerPlaces = document.querySelector(".places__list");
 export const formElements = document.querySelectorAll(".popup__form");
 export const popupImageBox = document.querySelector(".popup_type_image");
+export const popupImage = popupImageBox.querySelector(".popup__image");
+export const popupCaption = popupImageBox.querySelector(".popup__caption");
 
 export const nameInput = document.querySelector(".popup__input_type_name");
 export const jobInput = document.querySelector(
@@ -59,9 +62,7 @@ function handleFormSubmitEditProfile(evt) {
 
 formElementEditProfile.addEventListener("submit", handleFormSubmitEditProfile);
 
-formElements.forEach((item) => {
-  item.addEventListener("submit", handleFormAddSubmit);
-});
+formPopupNewPlace.addEventListener("submit", handleFormAddSubmit);
 
 function handleFormAddSubmit(e) {
   e.preventDefault();

@@ -1,4 +1,4 @@
-import { popupImageBox } from "../index.js";
+import { popupImageBox, popupImage, popupCaption } from "../index.js";
 
 export function openPopup(e) {
   e.classList.add("popup_is-animated", "popup_is-opened");
@@ -17,8 +17,6 @@ function overlayClose(e) {
 }
 
 export function openImagePopup(itemLink, itemName) {
-  const popupImage = popupImageBox.querySelector(".popup__image");
-  const popupCaption = popupImageBox.querySelector(".popup__caption");
   popupImage.src = itemLink;
   popupImage.alt = itemName;
   popupCaption.textContent = itemName;
