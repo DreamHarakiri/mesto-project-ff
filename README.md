@@ -1,3 +1,3 @@
 # Проектная работа Mesto
+https://dreamharakiri.github.io/mesto-project-ff/
 
-https://github.com/DreamHarakiri/mesto-project-ff.git
