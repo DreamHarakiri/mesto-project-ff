@@ -33,6 +33,12 @@ export function createCard(card, profileId, deleteCardFunction, likeProc) {
     });
   }
 
+  if (isLikeMine(card, profileId)) {
+    likeButton.classList.add("card__like-button_is-active");
+  } else {
+    likeButton.classList.remove("card__like-button_is-active");
+  }
+
   return allCards;
 }
 
