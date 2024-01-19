@@ -122,7 +122,12 @@ function handleFormAddSubmit(e) {
 
     newCardUser(newCardName, newCardUrl)
       .then((card) => {
-        const newCard = createCard(card, profileId, likeCard);
+        const newCard = createCard(
+          card,
+          profileId,
+          deleteCardFunction,
+          likeCard
+        );
         cardsContainerPlaces.prepend(newCard);
         formPopupNewPlace.reset();
         console.log("test tuta");
@@ -174,6 +179,10 @@ profileAddButton.addEventListener("click", function () {
 profileEditButton.addEventListener("click", function () {
   clearValidation(profileForm, validConfig);
   profileForm.reset();
+  document.querySelector(".popup__input_type_name").value =
+    nameProfile.textContent;
+  document.querySelector(".popup__input_type_description").value =
+    jobProfile.textContent;
   openPopup(popupTypeEdit);
 });
 

@@ -7,6 +7,7 @@ export function openPopup(e) {
 
 export function closePopup(e) {
   e.classList.remove("popup_is-opened");
+  document.removeEventListener("keydown", initialKey);
   setTimeout(() => e.classList.remove("popup_is-animated"), 600);
 }
 
@@ -16,10 +17,10 @@ function overlayClose(e) {
   }
 }
 
-export function openImagePopup(itemLink, itemName) {
-  popupImage.src = itemLink;
-  popupImage.alt = itemName;
-  popupCaption.textContent = itemName;
+export function openImagePopup(item) {
+  popupImage.src = item.link;
+  popupImage.alt = item.name;
+  popupCaption.textContent = item.name;
   openPopup(popupImageBox);
 }
 
