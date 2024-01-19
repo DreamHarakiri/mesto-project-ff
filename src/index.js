@@ -1,8 +1,7 @@
 //imports
 
 import "./pages/index.css";
-import { initialCards } from "./components/cards.js";
-import { createCard, deleteCardFunction, addCard } from "./components/card.js";
+import { createCard, deleteCardFunction, likeCard } from "./components/card.js";
 import { openPopup, closePopup } from "./components/modal.js";
 //global const
 
@@ -78,13 +77,14 @@ Promise.all([getUserInfo(), getInitialCards()])
 
   .then(([profile, card]) => {
     profileId = profile._id;
-    nameOutput.textContent = profile.name; //разберись с этими значениями, переставь на нужные
-    jobOutput.textContent = profile.about;
-    profileImage.style.backgroundImage = `url(${profile.avatar})`;
+    nameProfile.textContent = profile.name; //разберись с этими значениями, переставь на нужные
+    jobProfile.textContent = profile.about;
+    console.log("Ид профиля: " + profileId + "Имя профиля:" + profile.name);
+    profileAvatar.style.backgroundImage = `url(${profile.avatar})`;
 
     card.forEach((card) => {
-      cardsContainer.append(
-        addCard(card, profileId, removeCard, likeCard, openpopupImage)
+      cardsContainerPlaces.append(
+        createCard(card, profileId, deleteCardFunction, likeCard)
       );
     });
   })
@@ -92,17 +92,11 @@ Promise.all([getUserInfo(), getInitialCards()])
 
 //main
 
-function renderCards() {
-  initialCards.forEach((item) => {
-    const card = createCard(item, deleteCardFunction);
-    cardsContainerPlaces.append(card);
-  });
-}
-
 function handleFormSubmitEditProfile(evt) {
   evt.preventDefault();
 
   if (evt.target.getAttribute("name") === "edit-profile") {
+    сhangeUserInfo(nameInput.value, jobInput.value);
     nameProfile.textContent = nameInput.value;
     jobProfile.textContent = jobInput.value;
 
@@ -119,10 +113,23 @@ profileImageForm.addEventListener("submit", handleFormSubmitChangeAvatar);
 function handleFormAddSubmit(e) {
   e.preventDefault();
   if (e.target.getAttribute("name") === "new-place") {
-    addCard(headerImage.value, urlImage.value);
-    closePopup(popupTypeNewCard);
-    headerImage.value = "";
-    urlImage.value = "";
+    const buttonText = profileEditPopupBtn.textContent;
+    profileEditPopupBtn.textContent = "Сохранение..";
+
+    const newCardName = formPopupNewPlace.elements["place-name"].value;
+    const newCardUrl = formPopupNewPlace.elements["link"].value;
+    //    createCard(headerImage.value, urlImage.value);
+
+    newCardUser(newCardName, newCardUrl)
+      .then((card) => {
+        const newCard = createCard(card, profileId, likeCard);
+        cardsContainerPlaces.prepend(newCard);
+        formPopupNewPlace.reset();
+        console.log("test tuta");
+        closePopup(popupTypeNewCard);
+      })
+      .catch((error) => console.log("данные не обработанны:", error))
+      .finally(() => (profileEditPopupBtn.textContent = buttonText));
   }
 }
 
@@ -177,4 +184,3 @@ profileImage.addEventListener("click", function () {
 });
 
 enableValidation(validConfig);
-renderCards();

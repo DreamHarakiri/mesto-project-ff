@@ -1,0 +1,12 @@
+.likeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  justify-content: center;
+  align-items: center;
+}
+
+.like__counts {
+  margin: 0;
+  padding: 0;
+}
