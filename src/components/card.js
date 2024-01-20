@@ -3,7 +3,13 @@ import { putLike, deleteLike, deleteCard } from "./api";
 
 import { openImagePopup } from "./modal";
 
-export function createCard(card, profileId, deleteCardFunction, likeCard) {
+export function createCard(
+  card,
+  profileId,
+  deleteCardFunction,
+  likeCard,
+  openImagePopup
+) {
   const allCards = cardTemplatesContent.querySelector(".card").cloneNode(true);
 
   const cardImage = allCards.querySelector(".card__image");
@@ -18,7 +24,7 @@ export function createCard(card, profileId, deleteCardFunction, likeCard) {
   cardLike.textContent = card.likes.length;
 
   cardImage.addEventListener("click", function () {
-    openImagePopup(card);
+    openImagePopup(card); //вроде, сделал что просили, либо я опять не понял...
   });
 
   likeButton.addEventListener("click", function () {

@@ -2,7 +2,7 @@
 
 import "./pages/index.css";
 import { createCard, deleteCardFunction, likeCard } from "./components/card.js";
-import { openPopup, closePopup } from "./components/modal.js";
+import { openImagePopup, openPopup, closePopup } from "./components/modal.js";
 //global const
 
 const popupTypeNewCard = document.querySelector(".popup_type_new-card");
@@ -84,7 +84,13 @@ Promise.all([getUserInfo(), getInitialCards()])
 
     card.forEach((card) => {
       cardsContainerPlaces.append(
-        createCard(card, profileId, deleteCardFunction, likeCard)
+        createCard(
+          card,
+          profileId,
+          deleteCardFunction,
+          likeCard,
+          openImagePopup
+        )
       );
     });
   })
@@ -118,7 +124,6 @@ function handleFormAddSubmit(e) {
 
     const newCardName = formPopupNewPlace.elements["place-name"].value;
     const newCardUrl = formPopupNewPlace.elements["link"].value;
-    //    createCard(headerImage.value, urlImage.value);
 
     newCardUser(newCardName, newCardUrl)
       .then((card) => {
@@ -126,7 +131,8 @@ function handleFormAddSubmit(e) {
           card,
           profileId,
           deleteCardFunction,
-          likeCard
+          likeCard,
+          openImagePopup
         );
         cardsContainerPlaces.prepend(newCard);
         formPopupNewPlace.reset();
